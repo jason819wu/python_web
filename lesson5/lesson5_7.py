@@ -4,31 +4,31 @@ from crawl4ai.extraction_strategy import JsonCssExtractionStrategy
 
 async def main():
     raw_html = """<html>
-    <head>
-        <title>測試網頁</title>
-    </head>
-    <body>
-        <div class='item'>
-            <h2>項目1</h2>
-            <a href='https://example.com/item1'>連結1</a>
+      <body>
+        <div class='crypto-row'>
+          <h2 class='coin-name'>Bitcoin</h2>
+          <span class='coin-price'>$28,000</span>
         </div>
-    </body>
+        <div class='crypto-row'>
+          <h2 class='coin-name'>Ethereum</h2>
+          <span class='coin-price'>$1,800</span>
+        </div>
+      </body>
     </html>"""
 
     schema = {
         "name":"範例項目",
-        "baseSelector":"div.item",
+        "baseSelector":"div.crypto-row",
         "fields":[
             {
-                "name":"產品",
-                "selector":"h2",
+                "name":"幣名",
+                "selector":"h2.coin-name",
                 "type":"text"
             },
             {
-                "name":"連結",
-                "selector":"a",
-                "type":"attribute",
-                "attribute":"href"
+                "name":"價格",
+                "selector":"span.coin-price",
+                "type":"text"
             }
         ]
     }
